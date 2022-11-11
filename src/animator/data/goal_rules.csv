@@ -1,0 +1,8 @@
+antecedente,consequente
+carnívoro and tem_cor_amarelo-tostado and tem_manchas_escuras,leopardo
+carnívoro and tem_cor_amarelo-tostado and tem_listras_pretas,tigre
+ungulado and tem_pernas_longas and tem_pescoço_comprido and tem_cor_amarelo-tostado and tem_manchas_escuras,girafa
+ave and tem_pernas_longas and tem_pescoço_comprido and é_preto_e_branco,avestruz
+ave and nao_voa and nada and é_preto_e_branco,pinguim
+ave and tem_corpo_arredondado and penas_densas and nao_voa and é_doméstico,galinha
+ave and tem_pernas_longas and tem_pescoço_comprido and tem_cauda_curta and é_cor_de_rosa,flamingo

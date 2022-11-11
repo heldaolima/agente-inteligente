@@ -1,0 +1,9 @@
+antecedente,consequente
+tem_pelo,mamífero
+dá_leite,mamífero
+tem_penas,ave
+voa and bota_ovos,ave
+mamífero and come_carne,carnívoro
+mamífero and tem_dentes_pontiagudos and tem_garras and tem_olhos_frontais,carnívoro
+mamífero and tem_casco,ungulado
+mamífero and rumina and tem_dedos_pares,ungulado
