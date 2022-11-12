@@ -58,9 +58,9 @@ def print_rules(rules:list):
         print(f'{var_cons[0]}')
 
 
-def print_facts(facts):
+def print_facts(facts:dict):
     for key in list(facts.keys()):
-        print(f'{key}: {True}')
+        print(f'{key}: {facts[key]}')
 
 
 def read_facts_from_user(facts:dict, variables):

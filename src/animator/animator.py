@@ -42,58 +42,80 @@ def proved_true(rule:dict, var:str, facts:dict):
 
 
 def proved_false(rule:dict, var:str, facts:dict) -> bool:
+    # print(f"Was it proved false? {var}")
     return var in facts.keys() and rule[var] != facts[var]
 
 
-def adivinhar(intermediate_rules:list, goal_rules:list, facts:dict, variables:list):    
-    # trees = []
-
-    # for rule in goal_rules:
-    #     trees.append(backward_chaining(Node(list(rule['consequente'].keys())[0], False), intermediate_rules, goal_rules, facts))
-
-    #fase 1: descobrir os primeiros dados sobre o animal
-    for rule in list(intermediate_rules):
+def perguntar(rules:list, facts:dict, goal:bool):
+    # print(rules)
+    for rule in list(rules):
+        # print(f"Curr rule: {rule}")
         consequente = list(rule['consequente'].keys())[0]
         
         if proved_false(rule['consequente'], consequente, facts):
-            intermediate_rules.remove(rule)
+            rules.remove(rule)
             continue
         
         for ant in list(rule['antecedente'].keys()):
-
             if proved_false(rule['antecedente'], ant, facts):
-                print(f'\n I have already prooved {ant} false')
                 break
             
             if proved_true(rule['antecedente'], ant, facts):
-                print(f'\n I have already prooved {ant} true')
                 continue 
 
-            ans = input(f"O animal {' '.join(ant.split('_'))}? [s/n] ").lower().strip()
+            while True:
+                ans = input(f"O animal {' '.join(ant.split('_'))}? [s/n] ").strip().lower()
+                if ans[0] not in ['s', 'n']:
+                    print('Resposta inválida.')
+                else:
+                    break
+                
             if ans[0] == 's':
                 facts[ant] = True
             elif ans[0] == 'n':
                 facts[ant] = False
                 facts['nao_'+ant] = True
-        
+                break
+
         if modus_ponens_forward(rule, facts):
-            facts[consequente] = True
+            if goal:
+                while True:
+                    decid = input(f"O animal é um {consequente}? [s/n] ").strip().lower()
+                    if decid[0] not in ['s', 'n']:
+                        print("Resposta inválida.")
+                    else:
+                        break
+                if decid[0] == 's':
+                    facts[consequente] = True
+                    return True
+                elif decid[0] == 'n':
+                    break
+            else: 
+                facts[consequente] = True
         else:
             facts[consequente] = False
             facts['nao_'+consequente] = True
-            # intermediate_rules.remove(rule)
-            # break
-        
-        print(f'fatos agora: {facts}')        
-        
-    print("acabei de passar pelas regras intermediárias. Resultado: ")
-    for rule in intermediate_rules:
-        print(rule)
-
-    #fase 2: preprocessar as regras objetivo, para remover os animais que não se encaixam com as respostas até aqui
-
-    #fase 3: descobrir qual é o animal pela repetição do processo
     
+    return False
+
+
+def adivinhar(intermediate_rules:list, goal_rules:list, facts:dict) -> bool:
+    perguntar(intermediate_rules, facts, False)
+    
+    goal_cp = []
+    for rule in goal_rules:
+        flag = True
+        for ant in list(rule['antecedente'].keys()):
+            if proved_false(rule['antecedente'], ant, facts):
+                flag = False
+                break
+        if flag:   
+            goal_cp.append(rule)
+
+    for rule in goal_cp:
+        pass
+    
+    return perguntar(goal_cp, facts, True)
 
 
 def main(modo):
@@ -115,19 +137,9 @@ def main(modo):
     for goal in goal_rules:
         print(f"> {list(goal['consequente'].keys())[0]}")
 
-    print('Pense em um deles...\nVariáveis:')
-    # read_inputs.print_variables(variables)
+    print('Pense em um deles...\n')
     
-    adivinhar(intermediate_rules, goal_rules, facts, variables)
-
-    
-
-# if len(sys.argv) <= 1: 
-#     print("Usage: python3 animator.py <modo>.\nModos: 'adivinhar' | 'diagnosticar'")
-
-# sys.argv[1] = sys.argv[1].lower().strip()
-# if not sys.argv[1] in ['adivinhar', 'diagnosticar']:
-#     print("ERRO: modo inválido.\nModos: 'adivinhar' | 'diagnosticar'")
+    print("Adivinhei") if adivinhar(intermediate_rules, goal_rules, facts) else print("Tem certeza que pensou em um dos animais que eu conheço?")
 
 
 main(sys.argv)
