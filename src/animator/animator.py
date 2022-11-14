@@ -1,4 +1,3 @@
-from collections import deque
 import sys
 import os
 
@@ -9,20 +8,17 @@ sys.path.append(parent)
 # END use 'utils' package
 
 import utils.read_inputs as read_inputs
-from utils.tree import Node
-import utils.chainings as chainings
-
-def encadear(rules:list, facts:dict):
-    pass
-
-def playable(rule:dict, facts:dict) -> bool:
-    antecedente_set = set(rule['antecedente'])
-    facts_set = set(facts)
-
-    return len(antecedente_set.difference(facts_set)) == 0
 
 
-def modus_ponens_forward(rule:dict, facts:dict) -> bool:
+def proved_true(rule:dict, var:str, facts:dict):
+    return var in facts.keys() and rule[var] == facts[var]
+
+
+def proved_false(rule:dict, var:str, facts:dict) -> bool:
+    return var in facts.keys() and rule[var] != facts[var]
+
+
+def mpf_single_rule(rule:dict, facts:dict) -> bool:
     consequente = list(rule['consequente'].keys())[0]
     if consequente in facts.keys():
         return facts[consequente]
@@ -36,20 +32,8 @@ def modus_ponens_forward(rule:dict, facts:dict) -> bool:
             return False
     return True
 
-
-def proved_true(rule:dict, var:str, facts:dict):
-    return var in facts.keys() and rule[var] == facts[var]
-
-
-def proved_false(rule:dict, var:str, facts:dict) -> bool:
-    # print(f"Was it proved false? {var}")
-    return var in facts.keys() and rule[var] != facts[var]
-
-
 def perguntar(rules:list, facts:dict, goal:bool):
-    # print(rules)
     for rule in list(rules):
-        # print(f"Curr rule: {rule}")
         consequente = list(rule['consequente'].keys())[0]
         
         if proved_false(rule['consequente'], consequente, facts):
@@ -72,12 +56,13 @@ def perguntar(rules:list, facts:dict, goal:bool):
                 
             if ans[0] == 's':
                 facts[ant] = True
+                facts['nao_'+ant] = False
             elif ans[0] == 'n':
                 facts[ant] = False
                 facts['nao_'+ant] = True
                 break
 
-        if modus_ponens_forward(rule, facts):
+        if mpf_single_rule(rule, facts):
             if goal:
                 while True:
                     decid = input(f"O animal é um {consequente}? [s/n] ").strip().lower()
@@ -100,6 +85,7 @@ def perguntar(rules:list, facts:dict, goal:bool):
 
 
 def adivinhar(intermediate_rules:list, goal_rules:list, facts:dict) -> bool:
+    
     perguntar(intermediate_rules, facts, False)
     
     goal_cp = []
@@ -118,7 +104,7 @@ def adivinhar(intermediate_rules:list, goal_rules:list, facts:dict) -> bool:
     return perguntar(goal_cp, facts, True)
 
 
-def main(modo):
+def main():
     intermediate_rules = []
     goal_rules = []
     facts = {}
@@ -127,7 +113,6 @@ def main(modo):
     try:
         read_inputs.get_rules(intermediate_rules, variables, "intermediate_rules")
         read_inputs.get_rules(goal_rules, variables, "goal_rules")
-        read_inputs.get_facts(facts, variables, "data")
     except Exception as e:
         print(f'ERRO: {e.args[0]}')
         return 
@@ -139,7 +124,7 @@ def main(modo):
 
     print('Pense em um deles...\n')
     
-    print("Adivinhei") if adivinhar(intermediate_rules, goal_rules, facts) else print("Tem certeza que pensou em um dos animais que eu conheço?")
+    print("\nAdivinhei!") if adivinhar(intermediate_rules, goal_rules, facts) else print("\nTem certeza que pensou em um dos animais que eu conheço?")
 
 
-main(sys.argv)
+main()

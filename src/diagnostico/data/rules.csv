@@ -1,0 +1,9 @@
+antecedente,consequente
+fadiga and dor_de_cabeça and dores_no_corpo and ocasionais_dores_de_garganta and tosses_ocasionais,COVID19=0.80
+dor_de_cabeça and garganta_inflamada and tosse,gripe=0.90
+cansaço and dor_de_cabeça,mononucleose_infecciosa=0.95
+cansaço and garganta_inflamada,amigdalite=0.90
+cansaço,estresse=0.70
+fadiga and dor_de_cabeça and pulsação_elevada and baixo_nivel_de_oxigênio and perda_de_olfato and perda_de_paladar,Covid19=0.90
+coriza and espirro,rinite_alérgia=0.85
+dor_de_cabeça and coriza,sinusite=0.80
