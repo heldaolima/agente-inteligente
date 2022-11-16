@@ -32,6 +32,7 @@ def mpf_single_rule(rule:dict, facts:dict) -> bool:
             return False
     return True
 
+
 def perguntar(rules:list, facts:dict, goal:bool):
     for rule in list(rules):
         consequente = list(rule['consequente'].keys())[0]

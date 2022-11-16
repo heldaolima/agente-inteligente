@@ -3,10 +3,9 @@ class varFC:
         self.name = name
         self.value = value
         self.fc = fc
-    
-    def get_name(self) -> str:
-        return self.name
-    
+
+
+
     def to_string(self):
         return  f'{self.name}: {self.value} (FC = {self.fc})'
 
