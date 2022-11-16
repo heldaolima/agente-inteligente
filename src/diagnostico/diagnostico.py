@@ -11,7 +11,7 @@ import utils.read_inputs_fc as read_inputs
 from utils.incerteza import varFC
 
 def string_diagnostico(cons:varFC) -> str:
-    return f"{' '.join(cons.name.split('_')).capitalize()}: (FC: {cons.fc:.2f})"
+    return f"{' '.join(cons.name.split('_')).capitalize()} (FC: {cons.fc:.2f})"
 
 
 def print_facts(facts:list):
