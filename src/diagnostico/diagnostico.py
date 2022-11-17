@@ -48,14 +48,13 @@ def proved_false(var:varFC, facts:dict) -> bool:
 
 def modus_ponens_FC(rule:dict, facts:list, facts_answered):
     minimo = rule['antecedente'][0].fc
-    for i in range(0, len(rule['antecedente'])):
-        if proved_false(rule['antecedente'][i], facts_answered):
+    for antecedente in rule['antecedente']:
+        if proved_false(antecedente, facts_answered):
             return False
         
-        if rule['antecedente'][i].fc < minimo:
-            minimo = rule['antecedente'][i].fc
-    
-    print(f"mínimo: {minimo}")
+        if antecedente.fc < minimo:
+            minimo = antecedente.fc
+
     rule['consequente'].set_fc(minimo * rule['consequente'].fc)
     return True
 
