@@ -7,3 +7,5 @@ cansaço,estresse=0.70
 fadiga and dor_de_cabeça and pulsação_elevada and baixo_nivel_de_oxigênio and perda_de_olfato and perda_de_paladar,Covid19=0.90
 coriza and espirro,rinite_alérgia=0.85
 dor_de_cabeça and coriza,sinusite=0.80
+fadiga and febre and tremor and dores_nas_articulacoes and manchas,dengue=0.75
+fadiga and irritacao_na_pele and dores_nas_articulacoes and febre_alta,chikungunya=0.75
