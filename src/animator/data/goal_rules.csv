@@ -6,3 +6,7 @@ ave and tem_pernas_longas and tem_pescoço_comprido and é_preto_e_branco,avestr
 ave and nao_voa and nada and é_preto_e_branco,pinguim
 ave and tem_corpo_arredondado and penas_densas and nao_voa and é_doméstico,galinha
 ave and tem_pernas_longas and tem_pescoço_comprido and tem_cauda_curta and é_cor_de_rosa,flamingo
+mamífero and tem_pelo and vive_no_frio and eh_aquatico,foca
+mamífero and tem_pelo and vive_no_deserto and tem_corcovas,camelo
+ave and nao_voa and tem_bico_longo and tem_nome_de_fruta,kiwi
+carnívoro and tem_pelo and voa and tem_presas,morcego
