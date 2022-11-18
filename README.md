@@ -10,7 +10,7 @@ Basta seguir as instruções do menu em execução.
  
  
 ## Diagnóstico
-A aplicação que dá o diagnístico de uma doença, considerando o fator de certeza, é acessada com os seguintes comandos:
+A aplicação que dá o diagnóstico de uma doença, considerando o fator de certeza, é acessada com os seguintes comandos:
 
 	cd diagnostico
 	python3 diagnostico.py
