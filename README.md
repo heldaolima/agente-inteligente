@@ -16,3 +16,10 @@ A aplicação que dá o diagnóstico de uma doença, considerando o fator de cer
 	python3 diagnostico.py
 
 Basta seguir as instruções do menu em execução.
+
+## ExpetSINTA
+O arquivo `ia.bcm` contém a aplicação desenvolvida no software ExpertSINTA. Abaixo, prints da aplicação funcionando:
+
+![Print 1](/assets/asset1.jpeg "Aplicação ExpertSINTA")
+![Print 2](/assets/asset2.jpeg "Aplicação ExpertSINTA")
+![Print 3](/assets/asset3.jpeg "Aplicação ExpertSINTA")
